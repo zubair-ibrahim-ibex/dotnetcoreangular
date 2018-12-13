@@ -1,0 +1,16 @@
+<div class="container">
+  <h1 class="h1">Login</h1>
+  <form class="student-form" #f="ngForm" (ngSubmit)="onSubmit($event, f.value)">
+      <div class="form-group">
+        <mat-form-field class="student-full-width">
+            <input matInput [(ngModel)]="login.email" type="email" placeholder="Email" name="Email" ngModel>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="student-full-width">
+            <input matInput [(ngModel)]="login.password" placeholder="Password" type="password" name="Password" ngModel >
+        </mat-form-field>
+      </div>
+      <button mat-raised-button color="primary" type="submit">Login</button>
+  </form>
+</div>

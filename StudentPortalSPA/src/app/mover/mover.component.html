@@ -1,0 +1,33 @@
+<div>
+  <div class="row">
+    <div class="col-5">
+      <select [(ngModel)]="selectedInput" class="form-control" multiple>
+          <option *ngFor="let course of filterdInputCourses; let i = index" [ngValue]="course.id">
+              {{ course.name }}
+          </option>
+      </select>
+    </div>
+    <div class="col-2 text-center">
+      <div>
+        <button type="button" class="fa fa-arrow-right mt-4" color="primary" mat-mini-fab (click)="assign()">
+          <i class="material-icons">chevron_left</i>
+        </button>
+      </div>
+      <div>
+        <button type="button" class="fa fa-arrow-left mt-3" color="primary" mat-mini-fab (click)="remove()">
+          <i class="material-icons">chevron_right</i>
+        </button>
+      </div>
+    </div>
+    <div class="col-5">
+        <select [(ngModel)]="selectedRemote" class="form-control" multiple>
+          <option *ngFor="let course of filterdRemoteCourses; let i = index" [ngValue]="course.id">
+            {{ course.name }}
+          </option>
+        </select>
+    </div>
+    <p class="clear"></p>
+  </div>
+  <br />
+</div>
+

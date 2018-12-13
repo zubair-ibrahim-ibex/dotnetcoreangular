@@ -1,0 +1,12 @@
+<div class="course-dialog">
+    <h1 class="h1">Create Course</h1>
+    <form class="student-form" #f="ngForm" (ngSubmit)="onSubmit($event, f.value)">
+        <mat-form-field class="course-full-width">
+            <input matInput [(ngModel)]="course.name" placeholder="Course Name" name="Name" ngModel>
+        </mat-form-field>
+        <mat-form-field class="course-full-width">
+            <input matInput [(ngModel)]="course.code" placeholder="Code" name="Code" ngModel >
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">Save</button>
+    </form>
+</div>

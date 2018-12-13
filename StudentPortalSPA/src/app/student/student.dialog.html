@@ -1,0 +1,16 @@
+<div class="student-dialog">
+    <h1 class="h1">Create Student</h1>
+    <form class="student-form" #f="ngForm" (ngSubmit)="onSubmit($event, f.value)">
+        <mat-form-field class="student-full-width">
+            <input matInput [(ngModel)]="student.name" placeholder="Student Name" name="Name" ngModel>
+        </mat-form-field>
+        <mat-form-field class="student-full-width">
+            <input matInput [(ngModel)]="student.rollNo" placeholder="Roll No" name="RollNo" ngModel >
+        </mat-form-field>
+        <mat-form-field class="student-full-width">
+            <input matInput [(ngModel)]="student.enrollmentNo" placeholder="Enrollment No" name="EnrollmentNo" ngModel>
+        </mat-form-field>
+        <app-mover [inputCourses]="inputCourses" (onAssign)="onAssign($event)"></app-mover>
+        <button mat-raised-button color="primary" type="submit">Save</button>
+    </form>
+</div>
