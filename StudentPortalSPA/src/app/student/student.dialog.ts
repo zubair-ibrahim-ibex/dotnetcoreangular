@@ -26,7 +26,7 @@ export class StudentDialog implements OnInit {
       id: '',
       name: '',
       rollNo: '',
-      enrollmentNo: 'string',
+      enrollmentNo: '',
       courseIds: [''],
       studentWithCourses: [
         {
@@ -60,17 +60,32 @@ export class StudentDialog implements OnInit {
     }
 
     onSubmit(e, value: Student){
-      e.preventDefault();
-      var courseIds : string[] = [];
+      e.preventDefault();      
+      var courseIds : string[] = [];      
       this.inputCourses.map((course) => {
         courseIds.push(course.id);
       });
-      this.settingService.setProgressBarVisibility(true);
+      this.settingService.setProgressBarVisibility(true);      
       value.courseIds = courseIds as [string];
-      this.studentService.add(value).subscribe((student) => {
-        this.settingService.setProgressBarVisibility(false);
-        this.dialogRef.close("STUDENT_SAVED");
-      });
+      if(this.data.type === "CREATE"){
+        this.studentService.add(value).subscribe((student) => {
+          this.settingService.setProgressBarVisibility(false);
+          this.settingService.getToaster().success("Created");
+          this.dialogRef.close("STUDENT_SAVED");
+        },(errors) => {
+            this.settingService.setProgressBarVisibility(false);
+            this.settingService.showValidationErrors(errors.error);
+          });
+        }else if(this.data.type === "EDIT"){
+        this.studentService.edit(this.student.id, value).subscribe((courseResponse) => {
+          this.settingService.setProgressBarVisibility(false);
+          this.settingService.getToaster().success("Updated");
+          this.dialogRef.close("STUDENT_SAVED");
+        }, (errors) => {
+          this.settingService.setProgressBarVisibility(false);
+          this.settingService.showValidationErrors(errors.error);
+        });
+      }
     }
 
     onAssign(data){

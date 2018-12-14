@@ -46,12 +46,20 @@ export class CourseDialog implements OnInit {
         if(this.data.type === "CREATE"){
             this.courseService.add(course).subscribe((courseResponse) => {
                 this.settingService.setProgressBarVisibility(false);
+                this.settingService.getToaster().success("Created");
                 this.dialogRef.close("COURSE_SAVED");
+            }, (errors) => {
+                this.settingService.setProgressBarVisibility(false);
+                this.settingService.showValidationErrors(errors.error);
             });
         }else if(this.data.type === "EDIT"){
             this.courseService.edit(this.course.id, course).subscribe((courseResponse) => {
                 this.settingService.setProgressBarVisibility(false);
+                this.settingService.getToaster().success("Updated");
                 this.dialogRef.close("COURSE_SAVED");
+            }, (errors) => {
+                this.settingService.setProgressBarVisibility(false);
+                this.settingService.showValidationErrors(errors.error);
             });
         }
     }

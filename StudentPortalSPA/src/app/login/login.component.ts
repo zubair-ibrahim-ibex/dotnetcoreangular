@@ -3,6 +3,7 @@ import { Login } from '../login';
 import { AuthService } from '../auth.service';
 import { User } from '../user';
 import { Router } from '@angular/router';
+import { SettingsService } from '../settings.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,11 @@ export class LoginComponent implements OnInit {
     email: '',
     password: ''
   }
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(
+    private auth: AuthService, 
+    private router: Router,
+    private setting: SettingsService
+    ) { }
 
   ngOnInit() {
   }
@@ -25,6 +30,9 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('token', u.token);
       localStorage.setItem('userInfo', JSON.stringify(u));
       this.router.navigate(['/students']);
+      this.setting.getToaster().success("Successfully LoggedIn");
+    }, (error) => {
+      this.setting.getToaster().error(error.error.message);
     });
   }
 

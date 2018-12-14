@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, ChangeDetectorRef} from '@angular/core';
 import {MatSort, MatTableDataSource} from '@angular/material';
 import {MatDialog} from '@angular/material'
 import { StudentDialog } from './student.dialog';
@@ -37,7 +37,7 @@ export class StudentComponent implements OnInit {
       public dialog: MatDialog, 
       public studentService: StudentService, 
       public courseService: CourseService,
-      public settingService: SettingsService
+      public settingService: SettingsService,
   ) {}
    
   openDialog() {
@@ -54,15 +54,18 @@ export class StudentComponent implements OnInit {
     if(isConfirm){
       this.studentService.delete(id).subscribe((result) => {
         this.getStudent();
-      });
+        this.settingService.getToaster().success("Deleted");
+      }, (error => {
+        this.settingService.getToaster().error("Sorry try later");
+      }));
     }
   }
 
   edit(element){
     const dialogRef = this.dialog.open(StudentDialog, { data: { ...element, type: 'EDIT' } });
     dialogRef.afterClosed().subscribe(result => {
-      if(result === 'STUDENT_EDITED'){
-        console.log(1);
+      if(result === 'STUDENT_SAVED'){
+        this.getStudent();
       }
     });
   }

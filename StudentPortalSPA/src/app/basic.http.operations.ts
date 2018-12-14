@@ -21,14 +21,11 @@ export class BasicHttpOperations<TClass> {
     }
 
     edit(id, entity): Observable<TClass> {
-        const httpOptions = {
-            headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-        };  
         return this.http.put<TClass>(this.getUrl() + "/" + id, entity, this.getHeaders());
     }
 
     delete(id:string){
-        return this.http.delete(this.getUrl() + "/" + id);
+        return this.http.delete(this.getUrl() + "/" + id, this.getHeaders());
     }
 
     getById(id: string): Observable<TClass> {

@@ -1,8 +1,8 @@
-<mat-progress-bar *ngIf="settingService.progressBarVisibility" mode="indeterminate" color="accent"></mat-progress-bar>
+<mat-progress-bar *ngIf="settingService.getProgressBarVisibility()" mode="indeterminate" color="accent"></mat-progress-bar>
 <mat-toolbar color="primary">
   <span>Student Portal</span>
-  <a routerLink="/students" mat-button>Students</a>
-  <a routerLink="/courses" mat-button>Courses</a>
+  <a routerLink="/students" *ngIf="authService.isAuthenticated()" mat-button>Students</a>
+  <a routerLink="/courses" *ngIf="authService.isAuthenticated()" mat-button>Courses</a>
   <span class="example-spacer"></span>
   <button routerLink="/students" *ngIf="!authService.isAuthenticated()" mat-button>Login</button>
   <button *ngIf="authService.isAuthenticated()" mat-button>{{ getUser().name }}</button>

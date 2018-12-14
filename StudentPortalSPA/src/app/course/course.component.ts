@@ -49,7 +49,10 @@ export class CourseComponent implements OnInit {
     let isConfirm = confirm("Are you sure");
     if(isConfirm){
       this.courseService.delete(id).subscribe((result) => {
+        this.settingService.getToaster().success("Deleted");
         this.getCourses();
+      }, (error) => {
+        this.settingService.getToaster().error("Sorry try later");
       });
     }
   }

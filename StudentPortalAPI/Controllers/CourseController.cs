@@ -62,7 +62,7 @@ namespace StudentPortalAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult<UpdateResult> Put(string id, [FromBody] Course course)
+        public ActionResult<UpdateResult> Put(string id, [FromBody] SimpleCourseDTO course)
         {
             var OId = ObjectId.Parse(id);
             return this._courseRepository.Update(OId, course);

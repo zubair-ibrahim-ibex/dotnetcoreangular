@@ -95,11 +95,12 @@ public class StudentRepository : Repository<Student>, IStudentRepository
             courseIds.Add(ObjectId.Parse(oId));
         }
 
-        var filter = Builders<Student>.Filter.Eq("Id", id);
+        var filter = Builders<Student>.Filter.Eq("_id", id);
         var update = Builders<Student>.Update.Set("Name", student.Name)
                                             .Set("RollNo", student.RollNo)
                                             .Set("EnrollmentNo", student.EnrollmentNo)
                                             .Set("CourseIds", courseIds);
-        return _collection.UpdateOne(filter, update);
+
+        return _collection.UpdateOne(filter, update);                                       
     }
 }
